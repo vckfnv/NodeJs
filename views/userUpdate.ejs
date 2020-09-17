@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>User</title>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	</head>
+	<body>
+		<div class="board-page">
+			<div class="board">
+                <h1>수정</h1>
+                <div align="right"><%=data.user_name%> 의 정보</div>
+                <div class="board-form">
+					<input id = "uid" type = "hidden" value="<%=data.uid%>"/>
+                    <input id="user_id" type="text" value="<%=data.login_id%>"/>
+                    <input id="user_pwd" type="text" value="<%=data.login_pwd%>"/>
+                    <input id="user_name" type="text" value="<%=data.user_name%>"/>
+                    <input id="user_email" type="text" value="<%=data.email%>"/>
+                </div>
+				<div align="right">
+                	<button id="btn_user_update">수정</button>
+					<button id="btn_user_delete">삭제</button>	
+                    <button id="btn_user_list">목록</button>
+                </div>
+			</div>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="/javascripts/users.js"></script>
+	</body>
+</html>

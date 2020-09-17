@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Board</title>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	</head>
+	<body>
+		<div class="board-page">
+			<div class="board">
+				<p align="right"> <%=username%> 님 환영합니다.<button id="log_out">Logout</button>
+					<% if (typeof manager != "undefined"){%>
+						<button id="useredit">useredit</button></p>
+					<%}%>
+				<h1>글 목록</h1>
+
+				<!-- 검색 시작 -->
+				<form id="searchKey" action="/board/list/search" method="POST">
+					
+					<div class="search" align="right">
+						<select name = "selectS">
+							<%if (typeof ss == "undefined"){%>
+								<option value="title">제목</option>
+								<option value="writer">작성자</option>
+							<%}else if(ss == "title"){%>
+								<option value="title" selected>제목</option>
+								<option value="writer">작성자</option>					
+							<%}else if(ss == "writer"){%>
+								<option value="title">제목</option>
+								<option value="writer" selected>작성자</option>
+							<%}%>
+						</select>
+						<input id='searchid' name="searchKeyword" type="text" value="<%=sk%>"/>
+						
+						<button id = 'btnSubmit2'>검색</button>
+					</div>
+				</form>
+				<!-- 검색 종료 -->
+
+				<table class="title">
+					<tr>
+						<th width="20%">번호</th>
+						<th width="40%">제목</th>
+						<th width="20%">작성자</th>
+						<th width="20%">등록일</th>
+					</tr>
+				</table>
+				<table class="content">
+					<% if(status == 'OK') {%>
+						<%if(data.length == 0) {%>
+							<tr>
+									<td colspan="4">데이터가 없습니다.</td>
+								</tr>
+						<%}else{%>
+							<% data.forEach(function(item,index){ %>
+								<tr>
+									<td width="20%"><%= item.bid %></td>
+									<td width="40%"><a href = "/board/update?bid=<%=item.bid%>"><%= item.title %></a></td>
+									<td width="20%"><%= item.user_name %></td>
+									<td width="20%"><%= item.cdate2 %></td>
+								</tr>
+							<% });%>
+						<%}%>
+					<% } else{%>
+
+						<tr>
+							<td colspan="4">에러 잠시후 다시,게시물이 없습니다.</td>
+						</tr>
+					<%}%>
+				</table>
+				<div align="right"><button id="btn_board_new">새 글 등록</button><button id="btn_board_list">목록</button></div>
+			</div>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="/javascripts/board.js"></script>
+		
+	</body>
+</html>
